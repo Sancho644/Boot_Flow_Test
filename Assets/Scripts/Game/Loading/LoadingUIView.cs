@@ -31,7 +31,9 @@ namespace Game.Loading
         private void SetProgress(float value)
         {
             if (progressBar != null)
+            {
                 progressBar.fillAmount = value;
+            }
         }
 
         private void Bind(LoadingViewModel vm)
