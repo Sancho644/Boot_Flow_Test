@@ -15,7 +15,8 @@ namespace Game.States
         private readonly LoadingSettings _settings;
         private readonly IStatesController<GameState> _statesController;
 
-        public LoadState(LoadingViewModel viewModel, LoadingSettings settings, IStatesController<GameState> statesController)
+        public LoadState(LoadingViewModel viewModel, LoadingSettings settings,
+            IStatesController<GameState> statesController)
         {
             _viewModel = viewModel;
             _settings = settings;
@@ -33,14 +34,14 @@ namespace Game.States
             {
                 ct.ThrowIfCancellationRequested();
 
-                await UniTask.Delay(_settings.StepsDelayMs, cancellationToken: ct);
-
                 if (_settings.Steps <= 0)
                 {
                     throw new System.Exception("Steps must be greater than 0");
                 }
 
                 Progress.Value = (i + 1f) / _settings.Steps;
+                
+                await UniTask.Delay(_settings.StepsDelayMs, cancellationToken: ct);
             }
 
             await _statesController.EnterStateAsync(GameState.Menu, ct);

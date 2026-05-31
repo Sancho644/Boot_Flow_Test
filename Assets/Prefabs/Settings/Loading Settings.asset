@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c076e3d5869478eb6ce406b10aadc9e, type: 3}
   m_Name: Loading Settings
   m_EditorClassIdentifier: Assembly-CSharp::Game.Settings.LoadingSettings
+  <Steps>k__BackingField: 5
+  <StepsDelayMs>k__BackingField: 500
+  <LerpSpeed>k__BackingField: 8
