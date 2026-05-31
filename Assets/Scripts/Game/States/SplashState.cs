@@ -8,21 +8,20 @@ namespace Game.States
 {
     public class SplashState : IState
     {
-        private readonly SplashUIView _view;
         private readonly SplashSettings _settings;
+        private readonly SplashViewModel _viewModel;
         private readonly IStatesController<GameState> _statesController;
 
-        public SplashState(SplashUIView view, SplashSettings settings, IStatesController<GameState> statesController)
+        public SplashState(SplashViewModel viewModel, SplashSettings settings, IStatesController<GameState> statesController)
         {
-            _view = view;
+            _viewModel = viewModel;
             _settings = settings;
             _statesController = statesController;
         }
 
         public async UniTask EnterAsync(CancellationToken ct)
         {
-            _view.Initialize();
-            _view.gameObject.SetActive(true);
+            _viewModel.Initialize();
 
             await UniTask.Delay(_settings.DelayMs, cancellationToken: ct);
 
@@ -31,9 +30,8 @@ namespace Game.States
 
         public UniTask ExitAsync(CancellationToken ct)
         {
-            _view.Release();
-            _view.gameObject.SetActive(false);
-
+            _viewModel.Release();
+            
             return UniTask.CompletedTask;
         }
     }

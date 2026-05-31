@@ -44,18 +44,22 @@ namespace Game
                 var machine =
                     (StatesController<GameState>)
                     container.Resolve<IStatesController<GameState>>();
-
-                machine.RegisterState(
-                    GameState.Splash,
-                    container.Resolve<SplashState>());
-
-                machine.RegisterState(
-                    GameState.Load,
-                    container.Resolve<LoadState>());
-
-                machine.RegisterState(
-                    GameState.Menu,
-                    container.Resolve<MenuState>());
+                
+                var splashVm = container.Resolve<SplashViewModel>();
+                var loadVm   = container.Resolve<LoadingViewModel>();
+                var menuVm   = container.Resolve<MenuViewModel>();
+                
+                var splashView = container.Resolve<SplashUIView>();
+                var loadView   = container.Resolve<LoadingUIView>();
+                var menuUIView   = container.Resolve<MenuUIView>();
+                
+                splashView.Construct(splashVm);
+                loadView.Construct(loadVm);
+                menuUIView.Construct(menuVm);
+                
+                machine.RegisterState(GameState.Splash, container.Resolve<SplashState>());
+                machine.RegisterState(GameState.Load,   container.Resolve<LoadState>());
+                machine.RegisterState(GameState.Menu,   container.Resolve<MenuState>());
             });
 
             builder.RegisterEntryPoint<GameEntryPoint>();

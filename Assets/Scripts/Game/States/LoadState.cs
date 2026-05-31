@@ -11,13 +11,13 @@ namespace Game.States
     {
         private ReactiveValue<float> Progress { get; } = new(0f);
 
-        private readonly LoadingUIView _view;
+        private readonly LoadingViewModel _viewModel;
         private readonly LoadingSettings _settings;
         private readonly IStatesController<GameState> _statesController;
 
-        public LoadState(LoadingUIView view, LoadingSettings settings, IStatesController<GameState> statesController)
+        public LoadState(LoadingViewModel viewModel, LoadingSettings settings, IStatesController<GameState> statesController)
         {
-            _view = view;
+            _viewModel = viewModel;
             _settings = settings;
             _statesController = statesController;
         }
@@ -26,9 +26,8 @@ namespace Game.States
         {
             Progress.Value = 0f;
 
-            _view.Initialize();
-            _view.Bind(Progress);
-            _view.gameObject.SetActive(true);
+            _viewModel.Initialize();
+            _viewModel.Bind(Progress);
 
             for (var i = 0; i < _settings.Steps; i++)
             {
@@ -49,10 +48,7 @@ namespace Game.States
 
         public UniTask ExitAsync(CancellationToken ct)
         {
-            ct.ThrowIfCancellationRequested();
-
-            _view.Release();
-            _view.gameObject.SetActive(false);
+            _viewModel.Release();
 
             return UniTask.CompletedTask;
         }

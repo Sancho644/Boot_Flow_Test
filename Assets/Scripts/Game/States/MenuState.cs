@@ -7,31 +7,29 @@ namespace Game.States
 {
     public class MenuState : IState
     {
-        private readonly MenuUIView _view;
+        private readonly MenuViewModel _viewModel;
         private readonly IStatesController<GameState> _statesController;
 
-        public MenuState(MenuUIView view, IStatesController<GameState> statesController)
+        public MenuState(MenuViewModel viewModel, IStatesController<GameState> statesController)
         {
-            _view = view;
+            _viewModel = viewModel;
             _statesController = statesController;
         }
 
         public UniTask EnterAsync(CancellationToken ct)
         {
-            _view.Initialize();
-            _view.gameObject.SetActive(true);
+            _viewModel.Initialize();
 
-            _view.OnRestartClicked += HandleRestartClicked;
+            _viewModel.OnRestartClicked += HandleRestartClicked;
 
             return UniTask.CompletedTask;
         }
 
         public UniTask ExitAsync(CancellationToken ct)
         {
-            _view.OnRestartClicked -= HandleRestartClicked;
+            _viewModel.OnRestartClicked -= HandleRestartClicked;
 
-            _view.Release();
-            _view.gameObject.SetActive(false);
+            _viewModel.Release();
 
             return UniTask.CompletedTask;
         }

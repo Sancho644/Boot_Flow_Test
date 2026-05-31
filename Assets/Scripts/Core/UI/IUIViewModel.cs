@@ -2,5 +2,7 @@
 {
     public interface IUIViewModel
     {
+        public void Initialize();
+        public void Release();
     }
 }
