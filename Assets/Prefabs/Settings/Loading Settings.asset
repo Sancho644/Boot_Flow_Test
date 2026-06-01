@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Loading Settings
   m_EditorClassIdentifier: Assembly-CSharp::Game.Settings.LoadingSettings
   <Steps>k__BackingField: 5
-  <StepsDelayMs>k__BackingField: 500
-  <LerpSpeed>k__BackingField: 8
+  <StepsDelayMs>k__BackingField: 200
+  <LerpSpeed>k__BackingField: 15
